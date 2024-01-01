@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/static/styles.css" rel="stylesheet">
+    <title>{% block title %}Fuel Efficiency Tracker{% endblock %}</title>
+</head>
+<body>
+
+    <header>
+        <h1>Fuel Efficiency Tracker</h1>
+    </header>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="/analytics">Analytics</a>
+        <a href="/history">History</a>
+        <a href="/tips">Tips</a>
+        {% if session.user_id %}
+        <!-- If user is logged in, show logout button -->
+        <div class="login-register">
+            <a href="/logout">Logout</a>
+        </div>
+    {% else %}
+        <!-- If user is not logged in, show login and register buttons -->
+        <div class="login-register">
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+        </div>
+    {% endif %}
+    </nav>
+
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer>
+        <p>&copy; CS50 Final Project: Dominik Sewina, Fuel Efficiency Tracker</p>
+    </footer>
+
+</body>
+</html>

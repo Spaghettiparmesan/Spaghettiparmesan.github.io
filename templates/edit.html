@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Edit Entry
+{% endblock %}
+
+{% block content %}
+    <h1>Edit Entry</h1>
+    <form method="post">
+        <label for="new_date">Date:</label>
+        <input type="text" id="new_date" name="new_date" value="{{ event.date }}" required>
+
+        <label for="new_quantity">Quantity:</label>
+        <input type="number" id="new_quantity" name="new_quantity" value="{{ event.quantity }}" required>
+
+        <label for="new_expenses">Expenses:</label>
+        <input type="number" id="new_expenses" name="new_expenses" value="{{ event.expenses }}" required>
+
+        <label for="new_reach">Reach:</label>
+        <input type="number" id="new_reach" name="new_reach" value="{{ event.reach }}" required>
+
+        <button type="submit">Save Changes</button>
+    </form>
+{% endblock %}

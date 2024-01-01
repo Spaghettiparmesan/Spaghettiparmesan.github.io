@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block content %}
+    <h1>Your History</h1>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Quantity</th>
+                    <th>Expenses</th>
+                    <th>Price</th>
+                    <th>Reach</th>
+                    <th>Consumption</th>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for event in history %}
+                    <tr>
+                        <td>{{ event.date }}</td>
+                        <td>{{ event.quantity }} Liter</td>
+                        <td>{{ event.expenses }} €</td>
+                        <td>{{ event.price }} € / Liter</td>
+                        <td>{{ event.reach }} km</td>
+                        <td>{{ event.consumption }} Liter / 100km</td>
+                        <td>
+                            <a href="{{ url_for('edit', event_id=event.id) }}">Edit</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

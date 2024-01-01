@@ -1,0 +1,120 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Analytics
+{% endblock %}
+
+{% block content %}
+    <section>
+        <h2>Personal Development Analytics</h2>
+
+        {% if average_data %}
+            <h3>Average Values</h3>
+            <table class="center">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Average Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Quantity</td>
+                        <td>{{ average_data.average_quantity }} Liter</td>
+                    </tr>
+                    <tr>
+                        <td>Expenses</td>
+                        <td>{{ average_data.average_expenses }} €</td>
+                    </tr>
+                    <tr>
+                        <td>Price</td>
+                        <td>{{ average_data.average_price }} € / Liter</td>
+                    </tr>
+                    <tr>
+                        <td>Reach</td>
+                        <td>{{ average_data.average_reach }} km</td>
+                    </tr>
+                    <tr>
+                        <td>Consumption</td>
+                        <td>{{ average_data.average_consumption }} Liter / 100km</td>
+                    </tr>
+                    <tr>
+                        <td>Total Expenses</td>
+                        <td>{{ average_data.total_expenses }} €</td>
+                    </tr>
+                </tbody>
+            </table>
+        {% else %}
+            <p>No data available for analytics.</p>
+        {% endif %}
+
+        {% if history %}
+            <h3>Gas Consumption Over Time</h3>
+            <canvas id="consumptionChart" width="400" height="200"></canvas>
+
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script>
+                // Get data from Flask and convert it to a format that Chart.js understands
+                // var chartData = {{ average_data|tojson|safe }};
+
+                var ctx = document.getElementById('consumptionChart').getContext('2d');
+                var consumptionChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: {{ dates | safe}},
+                        datasets: [{
+                            label: 'Gas Consumption in l / 100km',
+                            data: {{ average_data.consumption | safe}},
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            x: {
+                                type: 'linear',
+                                position: 'bottom'
+                            }
+                        }
+                    }
+                });
+            </script>
+
+            <h3>Gas Price Over Time</h3>
+            <canvas id="priceChart" width="400" height="200"></canvas>
+
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script>
+                // Get data from Flask and convert it to a format that Chart.js understands
+                // var chartData = {{ average_data|tojson|safe }};
+
+                var ctx = document.getElementById('priceChart').getContext('2d');
+                var consumptionChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: {{ dates | safe}},
+                        datasets: [{
+                            label: 'Price in € / l',
+                            data: {{ average_data.prices | safe}},
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            x: {
+                                type: 'linear',
+                                position: 'bottom'
+                            }
+                        }
+                    }
+                });
+            </script>
+
+        {% else %}
+            <p>No data available for the chart.</p>
+        {% endif %}
+    </section>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Fuel Efficiency Tips
+{% endblock %}
+
+{% block content %}
+    <div class="tips-container">
+        <div class="tip" onclick="toggleTip(this)">
+            <h2>Fuel Efficiency Tip #1</h2>
+            <p>Consider using cruise control on the highway to maintain a consistent speed and improve fuel efficiency.</p>
+        </div>
+
+        <div class="tip" onclick="toggleTip(this)">
+            <h2>Fuel Efficiency Tip #2</h2>
+            <p>Regularly check and replace air filters to ensure optimal engine performance and better gas mileage.</p>
+        </div>
+
+        <div class="tip" onclick="toggleTip(this)">
+            <h2>Fuel Efficiency Tip #3</h2>
+            <p>Avoid aggressive driving behaviors such as rapid acceleration and abrupt braking, as they can decrease fuel efficiency.</p>
+        </div>
+
+        <div class="tip" onclick="toggleTip(this)">
+            <h2>Fuel Efficiency Tip #4</h2>
+            <p>Keep your vehicle well-maintained by following the manufacturer's recommended maintenance schedule. A well-maintained vehicle runs more efficiently.</p>
+        </div>
+
+        <div class="tip" onclick="toggleTip(this)">
+            <h2>Fuel Efficiency Tip #5</h2>
+            <p>Remove unnecessary items from your vehicle to reduce weight and improve fuel efficiency. Excess weight can decrease gas mileage.</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleTip(tip) {
+            tip.classList.toggle('active');
+        }
+    </script>
+{% endblock %}

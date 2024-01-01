@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+
+{% block title %}Home - Gas Consumption Tracker{% endblock %}
+
+{% block content %}
+    <section>
+        <h2>Welcome to Fuel Efficiency Tracker</h2>
+        <p>This is my final project of cs50 that tracks gas consumption and gives you a few useful facts and analytics about this so you can easily track you fueling:</p>
+
+        <form action="/" method="post">
+            <label for="gas_quantity">Gas in Liters:</label>
+            <input type="numeric" id="gas_quantity" name="gas_quantity" required>
+
+            <label for="expenses">Expenses in €:</label>
+            <input type="numeric" id="expenses" name="expenses" required>
+
+            <label for="reach">KM since last refill:</label>
+            <input type="numeric" id="reach" name="reach" required>
+
+            <button type="submit">Submit Data</button>
+        </form>
+    </section>
+{% endblock %}
